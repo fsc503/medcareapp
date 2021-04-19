@@ -1,0 +1,49 @@
+<doctype html="">
+
+    <title>MedCare</title>
+<style>
+body{
+		background-image: url(static/a.jpg);
+		background-repeat:no-repeat;
+		background-size:cover;
+		background-position:center;
+}
+
+input[type=submit] {
+			background-color:lightblue;
+}
+h1{
+				text-align:center;
+				color:white;
+}
+a {
+		color:black;
+		
+	}
+</style>
+<body>
+<br/><br/>
+<h1>WELCOME to MedCare WEBSITE</h1>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% from "_formhelpers.html" import render_field %}
+      
+<form method="post">
+  <dl>
+    <p>
+    {{ render_field(form.search) }}
+  </p></dl> 
+  <p><input type="submit" value="Search">
+</p></form><br/><br/>
+<h3>click on below link to delete previous orders</h3>
+<p><a href="{{ url_for('.delete_order') }}"> Deleteorders </a></p>
+</body>
+</doctype>

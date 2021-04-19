@@ -1,0 +1,28 @@
+<doctype html="">
+<title>Details for ordering</title>
+<style>
+body {
+		background-color:lightblue;
+}
+input[type=submit] {
+			background-color:lightblue;
+}
+</style>
+<body>
+<br/><br/>
+<h2>Enter your details to place order!</h2><br/><br/>
+{% from "_formhelpers.html" import render_field %}
+
+<form method="post">
+    <dl>
+        <dt>{{ render_field(form.name) }}</dt><br/><br/><br/>
+        <dt>{{ render_field(form.address) }}</dt><br/><br/><br/>
+        <dt>{{ render_field(form.phone) }}</dt><br/><br/><br/>
+        <dt>{{ render_field(form.quantity) }}</dt><br/><br/><br/>
+        <dt>{{ render_field(form.age) }}</dt><br/><br/><br/>
+		
+    </dl>
+    <p><input type="submit" valuie="Submit">
+</p></form>
+</body>
+</doctype>
