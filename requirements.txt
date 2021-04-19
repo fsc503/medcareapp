@@ -1,0 +1,4 @@
+flask
+flask-sqlalchemy
+Flask-WTF
+flask_table
