@@ -1,4 +1,5 @@
 # db_creator.py
+#to create tables
 
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Integer, String
