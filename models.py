@@ -1,5 +1,5 @@
 # models.py 
-
+# give model for tables
 from app import db
 
 
