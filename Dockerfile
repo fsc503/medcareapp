@@ -3,4 +3,4 @@ COPY . /main
 WORKDIR /main
 RUN pip install -r requirements.txt
 EXPOSE 5000
-CMD ["python","main.py"]
+CMD ["python","main.py","--host","0.0.0.0"]
