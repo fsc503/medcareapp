@@ -1,8 +1,8 @@
-# main.py
+# app1.py
 from app import app
 from db_setup import init_db, db_session
 from forms import TabletSearchFrom,OrderForm,TabletDeleteForm
-from flask import flash, render_template, request, redirect
+from flask import flash, render_template, request, redirect #imported flask
 from models import Tablets,Orders
 from tables import Results,Details
 import random
@@ -10,18 +10,18 @@ import random
 init_db()
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST']) #first page; to search the tablet from tablet table in healthcare database
 def index():
-    search = TabletSearchFrom(request.form)
+    search = TabletSearchFrom(request.form) #to get the data from tabletsearchform in form.py
     if request.method == 'POST':
         return search_results(search)
-    return render_template('index.html', form=search)
+    return render_template('index.html', form=search) #index.html has search box designed in it
 
 
 @app.route('/results')
-def search_results(search):
+def search_results(search): #search has the form from prev page
     results = []
-    search_string = search.data['search']
+    search_string = search.data['search'] #search_string contains tablet name user searches
 
     if search_string:
     
@@ -36,11 +36,11 @@ def search_results(search):
         # display results
         table = Results(results)
         table.border = True
-        return render_template('results.html', table=table)
+        return render_template('results.html', table=table) #results displayed in form of table
         
 
     
-def save_order(tablet, form):
+def save_order(tablet, form): #from add it is called to add details into order table
     """
     Save the changes to the database
     """
@@ -66,13 +66,13 @@ def save_order(tablet, form):
 def add(id):
      qry = db_session.query(Tablets).filter(
                 Tablets.tabletId==id)
-     tablet = qry.first()
+     tablet = qry.first() 
      if tablet:
-        form = OrderForm(formdata=request.form, obj=tablet)
+        form = OrderForm(formdata=request.form, obj=tablet) 
         if request.method == 'POST' and form.validate():
             orderid=save_order(tablet, form)
             return order_details(id,orderid)
-        return render_template('add_items.html', form=form)
+        return render_template('add_items.html', form=form) #to display the form to add user details
      else:
         return 'Error loading #{id}'.format(id=tabletId)
 '</int:id>'
@@ -95,14 +95,10 @@ def order_details(id,orderid):
         # display results
         table1 = Details(details)
         table1.border = True
-        return render_template('details.html', table1=table1)
+        return render_template('details.html', table1=table1) #displaying the orderid details in table format
         
 @app.route('/delete/<int:id>', methods=['GET','DELETE'])
-def delete(id):
-    """
-    Delete the item in the database that matches the specified
-    id in the URL
-    """
+def delete(id): #direct deletion form the order details table
     
     qry = db_session.query(Orders).filter(
         Orders.orderId==id)
@@ -125,11 +121,7 @@ def delete(id):
        return 'Error deleting #{id}'.format(id=order.orderId)
        
 @app.route('/returnback/<int:id>', methods=['GET','POST'])      
-def returnback(id):
-    """
-    Delete the item in the database that matches the specified
-    id in the URL
-    """
+def returnback(id): #to exit to first page from order table page
     
     qry = db_session.query(Orders).filter(
         Orders.orderId==id)
@@ -146,7 +138,7 @@ def returnback(id):
     
 '</int:id>'     
 @app.route('/delete_order', methods=['GET', 'POST','DELETE'])   
-def delete_order():
+def delete_order(): #deleting from first page
     
     form = TabletDeleteForm(request.form)
     
