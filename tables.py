@@ -4,7 +4,6 @@ class Results(Table):
     tabletId = Col('TabletId',show=False)
     tabletname = Col('TabletName')
     tabletcost = Col('TabletCost')
-    #tabletquantity = Col('TabletQuantity')
     edit = LinkCol('ADDtoCART', 'add', url_kwargs=dict(id='tabletId'))
     
 class Details(Table):
