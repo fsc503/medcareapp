@@ -1,6 +1,11 @@
-FROM python:3.9-slim-buster
-COPY . /main
-WORKDIR /main
-RUN pip install -r requirements.txt
-EXPOSE 5000
-CMD ["python","main.py","--host","0.0.0.0"]
+FROM python:3
+
+WORKDIR /usr/src/app1
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "app1.py"]
